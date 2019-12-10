@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
+
 
 inline void swap(char* x, char* y)
 {
@@ -13,6 +13,7 @@ char* itoa(int value, int base);
 int main (int argc, char** argv)
 {
     char * result = itoa(10, 10);
+    printf("%s%s", "Result: ", result);
     delete [] result;
 }
 
@@ -39,12 +40,6 @@ char* itoa(int value, int base)
     const char* available = "0123456789abcdef";
     
     while(valuecopy != 0)
-    {
-        buffer[i] = available[valuecopy % base];
-        valuecopy /= base;
-    }
-
-    for(; valuecopy && i; --i)
     {
         buffer[i++] = available[valuecopy % base];
         valuecopy /= base;
