@@ -1,19 +1,24 @@
 #include <stdio.h>
 
-
-inline void swap(char* x, char* y)
+inline void reverse(char* str, int length)
 {
-    char temp = *x;
-    *x = *y;
-    *y = temp;
+    int start = 0, end = length - 1;
+    while(start < end)
+    {
+        char temp = *(str+start);
+        *(str+start) = *(str+end);
+        *(str+end) = temp;
+        start++;
+        end--;
+    }
 }
 
 char* itoa(int value, int base);
 
 int main (int argc, char** argv)
 {
-    char * result = itoa(10, 10);
-    printf("%s%s", "Result: ", result);
+    char * result = itoa(-10, 10);
+    printf("%s%s\n", "Result: ", result);
     delete [] result;
 }
 
@@ -39,6 +44,11 @@ char* itoa(int value, int base)
     int valuecopy = value, i = 0; 
     const char* available = "0123456789abcdef";
     
+    if(valuecopy < 0 && base == 10)
+    {
+        valuecopy = -valuecopy;
+    }
+
     while(valuecopy != 0)
     {
         buffer[i++] = available[valuecopy % base];
@@ -52,13 +62,7 @@ char* itoa(int value, int base)
 
     buffer[i] = '\0';
 
-    int start = 0, end = i - 1;
-    while(start < end)
-    {
-        swap((buffer+start), (buffer+end));
-        start++;
-        end--;
-    }
+    reverse(buffer, i);
 
     return buffer; 
 }
