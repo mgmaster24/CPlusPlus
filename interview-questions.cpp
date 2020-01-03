@@ -109,7 +109,7 @@ void BuildStringFromMatrix(int* Matrix, int NumRows, int NumColumns, char* OutBu
                 traverse = down;
                 upperLim++;
                 row++;
-	            col--;
+                col--;
             }
         }
         else if (down == traverse)
@@ -118,7 +118,7 @@ void BuildStringFromMatrix(int* Matrix, int NumRows, int NumColumns, char* OutBu
             {
                 traverse = left;
                 rightLim--;
-	            row--;
+                row--;
                 col--;
             }
         }
@@ -129,7 +129,7 @@ void BuildStringFromMatrix(int* Matrix, int NumRows, int NumColumns, char* OutBu
                 traverse = up;
                 lowerLim--;
                 row--;
-	            col++;
+                col++;
             }
         }
         else // up
