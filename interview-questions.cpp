@@ -83,9 +83,9 @@ char* itoa(int value, int base)
 
 void BuildStringFromMatrix(int* Matrix, int NumRows, int NumColumns, char* OutBuffer)
 {
-    enum { left, right, up, down } traverse = right;
-    int upperLim = 0, lowerLim = NumRows -1, leftLim = 0, rightLim = NumColumns - 1, 
-        elemsToProcess = NumRows * NumColumns, row = 0, col = 0;
+    enum { left, right, up, down } direction = right;
+    int top = 0, bottom = NumRows-1, leftBounds = 0, rightBounds = NumColumns-1, 
+        elemsToProcess = NumRows*NumColumns, row = 0, col = 0;
     while (elemsToProcess > 0)
     {
         int element = Matrix[row * NumColumns + col];
@@ -102,42 +102,42 @@ void BuildStringFromMatrix(int* Matrix, int NumRows, int NumColumns, char* OutBu
 
         sprintf(OutBuffer + strlen(OutBuffer), "%s", cElem);
 
-        if (right == traverse)
+        if (right == direction)
         {
-            if (++col > rightLim)
+            if (++col > rightBounds)
             {
-                traverse = down;
-                upperLim++;
+                direction = down;
+                top++;
                 row++;
                 col--;
             }
         }
-        else if (down == traverse)
+        else if (down == direction)
         {
-            if (++row > lowerLim)
+            if (++row > bottom)
             {
-                traverse = left;
-                rightLim--;
+                direction = left;
+                rightBounds--;
                 row--;
                 col--;
             }
         }
-        else if (left == traverse)
+        else if (left == direction)
         {
-            if (--col < leftLim)
+            if (--col < leftBounds)
             {
-                traverse = up;
-                lowerLim--;
+                direction = up;
+                bottom--;
                 row--;
                 col++;
             }
         }
         else // up
         {
-            if (--row < upperLim)
+            if (--row < top)
             {
-                traverse = right;
-                leftLim++;
+                direction = right;
+                leftBounds++;
                 row++;
                 col++;
             }
